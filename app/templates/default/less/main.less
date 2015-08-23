@@ -28,7 +28,21 @@ input[type="submit"], input[type="button"] {
     }
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="number"] {
+    border: 1px solid #DDDDDD;
+    border-radius: 0;
+    .transitions(0.1s);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    &:focus {
+        outline: none;
+        border: 1px solid #e74c3c;
+        box-shadow: 0 0 5px #e74c3c;
+    }
+}
+
+textarea {
     border: 1px solid #DDDDDD;
     border-radius: 0;
     .transitions(0.1s);
@@ -82,8 +96,7 @@ header {
         height: 46px;
         line-height: 46px;
         border-bottom: 1px solid @light-grey-color;
-        
-                
+           
         div#social_links_container {
             float: right;
             height: 32px;
@@ -278,9 +291,7 @@ header {
                     width: 100%;
                     height: 2px;
                     bottom: 0;
-                    left: 0;
                     background-color: @dark-grey-color;
-                    border-radius: 5px;
                     transform: scaleX(0);
                     transition: .18s ease-in-out;
                 }
@@ -298,11 +309,7 @@ header {
                     font-size: 20px;
                     z-index: 1;
                 }
-                
-                &#create_entry a:before {
-                    background-color: white;
-                }
-                
+
                 &#create_entry {
                     background-color: #e74c3c;
                     
@@ -312,6 +319,10 @@ header {
                     
                     a {
                         color: white;
+                        
+                        &:before {
+                            background-color: white;
+                        }
                     }
                 }
             }
@@ -319,13 +330,15 @@ header {
     }
 }
 
-/* main div ---------------------------------------------------------------------------------- */
+/* Main div and its content ------------------------------------------------------------------------- */
 div#global_container {
     width: 100%;
     min-height: 600px; /* Random number that looks good */
     background-color: #DEE1E3;
     padding-top: 10px;
     padding-bottom: 150px;
+    
+    /* Syling for the home page's content */
     
     div#summary_wrapper {
         width: 750px;
@@ -388,13 +401,13 @@ div#global_container {
     
     /* Styling for the log in and register page ------------------------------------------------------------ */
     
-    h1#login_header, h1#register_header {
+    h1.form_header {
             text-align: center;
             font-size: 57px;
             margin-top: 50px;
     }
     
-    div#login_error_wrapper {
+    div#login_error_wrapper, div#entry_error_wrapper {
         width: 640px;
         height: 55px;
         margin: 0 auto;
@@ -405,7 +418,7 @@ div#global_container {
         color: white;
     }
     
-    div#login_wrapper, div#register_wrapper {
+    div.form_wrapper {
         width: 640px;
         background-color: white;
         margin: 0 auto;
@@ -413,22 +426,29 @@ div#global_container {
         padding-top: 20px;
         padding-bottom: 70px;
 
-        input[type="text"], input[type="password"] {
-            width: 80%;
-            display: block;
-            margin: 0 auto;
+        input[type="text"], input[type="password"], input[type="number"] {
+            width: calc(100% - 2px);
             margin-top: 20px;
             height: 40px;
             padding-left: 10px;
         }
                           
         input[type="submit"] {
-            width: calc(80% + 2px);
+            width: 100%;
             height: 50px;
-            display: block;
-            margin: 0 auto;
             margin-top: 25px;
             font-size: 15px;
+        }
+        
+        textarea {
+            width: calc(100% - 2px); //Doesn't work for some reason, it just makes 100% - 2px to 98%...
+            padding-left: 10px;
+            padding-top: 11px;
+            height: 180px;
+            margin-top: 25px;
+            font-size: 13px;
+            font-family: inherit;
+            resize: vertical;
         }
 
         div#checkbox_container {
@@ -467,7 +487,10 @@ div#global_container {
         }
         
         div.p {
+            
             position: relative;
+            width: 80%;
+            margin: 0 auto;
             
             div.error {
                 position: absolute;
@@ -479,7 +502,42 @@ div#global_container {
                 padding: 5px 12px;
             }
         }
+        
+        /* Styling for the elements of the create entry page ---------------------------------- */
+        div#input_field_container {
+        
+            input[type="text"].type {
+                width: 65%;
+                float: left;
+                clear: left;
+            }
+            
+            input[type="number"].amount {
+                width: 25%;
+                float: right;
+                clear: right;
+            }
+        }
+        
+        input[type="button"]#add_input_button {
+            float: right;
+            height: 50px;
+            width: 18%;
+            margin-top: 20px;
+            font-size: 15px;
+        }
     }
+    
+    div#entry_info {
+        width: 640px;
+        margin: 0 auto;
+        margin-top: 20px;
+        
+        p {
+            line-height: 26px;
+        }
+    }        
+    
     /* Styling for the activated account page --------------------------------------------------*/
     
     div.activated {
@@ -548,7 +606,7 @@ div#global_container {
     }
 }
 
-/* footer ------------------------------------------------------------------------------------- */
+/* Footer ------------------------------------------------------------------------------------- */
 
 footer {
     background-color: #2c3e50;
@@ -612,13 +670,13 @@ footer {
     to   { opacity: 1; }
 }
 
-/* Firefox < 16 */
+/* Firefox v. < 16 */
 @-moz-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
 
-/* Safari, Chrome and Opera > 12.1 */
+/* Safari, Chrome and Opera v. > 12.1 */
 @-webkit-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -630,7 +688,7 @@ footer {
     to   { opacity: 1; }
 }
 
-/* Opera < 12.1 */
+/* Opera v. < 12.1 */
 @-o-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -710,7 +768,7 @@ footer {
         height: auto !important;
         
         &:last-child {
-            margin-bottom: 20px;
+            margin-bottom: 20px !important;
         }
     }
 }

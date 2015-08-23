@@ -61,10 +61,11 @@ use Core\Router;
 use Helpers\Hooks;
 
 //define routes
-Router::any('', 'Controllers\Site@home');
-Router::any('about', 'Controllers\Site@about');
-Router::any('contact', 'Controllers\Site@contact');
-Router::any('support', 'Controllers\Site@support');
+Router::any("", "Controllers\Site@home");
+Router::any("about", "Controllers\Site@about");
+Router::any("contact", "Controllers\Site@contact");
+Router::any("support", "Controllers\Site@support");
+Router::any("entry", "Controllers\Site@create_entry");
 
 Router::any("login", "Controllers\Auth@login");
 Router::any("logout", "Controllers\Auth@logout");

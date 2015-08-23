@@ -19,16 +19,16 @@ $hooks = Hooks::get();
         <div id="footer_links">
            <ul>
                 <li>
-                   <a href="#">Home</a>
+                   <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="#">About us</a>
+                    <a href="/about">About us</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="/contact">Contact</a>
                 </li>
                 <li>
-                    <a href="#">Support</a>
+                    <a href="/support">Support</a>
                 </li>
             </ul>
         </div>
@@ -38,7 +38,7 @@ $hooks = Hooks::get();
 <!-- JS -->
 <?php
 Assets::js(array(
-	Url::templatePath() . 'js/main.js?version=20'
+	Url::templatePath() . 'js/main.js?version=24'
 ));
 
 //hook for plugging in javascript

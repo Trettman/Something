@@ -51,7 +51,7 @@
             $hash = password_hash($email . $secret, PASSWORD_DEFAULT);
             
             $mail = new \Helpers\PhpMailer\Mail();
-            $mail->setFrom("noreply@something.com");
+            $mail->setFrom("noreply@something.com", "Something");
             $mail->addAddress($email);
             $mail->subject("Something Verification Email");
             $mail->body("
@@ -63,7 +63,7 @@
                                 <br>
                                 You're almost done with your Something account registration. The only thing you need to do now is to activate your account by clicking the link below.
                                 <br>
-                                <a href='http://www.testing.sellerstam.mebokund.com/activate?email=$email&code=$hash'>http://www.testing.sellerstam.mebokund.com/activate?email=$email&code=$hash</a>
+                                <a href='http://www.something.sellerstam.mebokund.com/activate?email=$email&code=$hash'>http://www.something.sellerstam.mebokund.com/activate?email=$email&code=$hash</a>
                             </body>
                         </html>
                         ");

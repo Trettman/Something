@@ -24,4 +24,12 @@ $(document).ready(function(){
             $("#menu").slideUp("slow");
         }            
     });
+    
+    $("#add_input_button").click(function(){
+        $("#input_field_container").append( "<div class='p'>" + 
+                                                "<input type='text' class='type' name='type_of_liquor[]' placeholder='Type of liquor'>" +
+                                                "<input type='number' class='amount' name='amount_of_type[]' placeholder='Amount'>" +
+                                                "<br clear='all'>" +
+                                            "</div>");
+    });
 });

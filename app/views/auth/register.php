@@ -7,8 +7,8 @@
 ?>
 
 <div <div id="global_container">
-    <h1 id="register_header">Register</h1>
-    <div id="register_wrapper">
+    <h1 class="form_header">Register</h1>
+    <div class="form_wrapper">
         <?= Form::open(array("method" => "post")); ?>
             <div class="p">
                 <?= Form::input(array("name" => "register_name", "placeholder" => "Full name", "value" => $_POST["register_name"])); ?>
@@ -30,9 +30,11 @@
             </div>
             <div class="p">
                 <?= Form::input(array("name" => "register_password", "placeholder" => "Password", "type" => "password")); ?>
-                <?php if(isset($error["no_password"]) || isset($error["no_password_match"])){ ?>
+                <?php if(isset($error["no_password"]) || isset($error["password_short"]) || isset($error["no_uppercase"]) || isset($error["no_password_match"])){ ?>
                     <div class="error">
                         <?= $error["no_password"]; ?>
+                        <?= $error["password_short"]; ?>
+                        <?= $error["no_uppercase"]; ?>
                         <?= $error["no_password_match"]; ?>
                     </div>
                 <?php } ?>

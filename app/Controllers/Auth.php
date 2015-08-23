@@ -16,6 +16,15 @@
         
         public function login(){
 
+            $data["title"] = "Login";
+            
+            if(!isset($_POST["login_button"])){
+                $error[] = "You need to log in to continue.";
+                View::renderTemplate("header", $data);
+                View::render("auth/login", $data, $error);
+                View::renderTemplate("footer", $data);
+            }
+        
             if(isset($_POST["login_button"])){
                 
                 //The login variables
@@ -31,31 +40,25 @@
                 } else if(!Password::verify($password, $this->_model->getHash($email))){
                     $error[] = "Email or password is incorrect.";                    
                 }
-                
-                if(isset($error)){
-                    
-                    $data["title"] = "Login";
-                    View::renderTemplate("header", $data);
-                    View::render("auth/login", $data, $error);
-                    View::renderTemplate("footer", $data);
-                }
+
+                View::renderTemplate("header", $data);
+                View::render("auth/login", $data, $error);
+                View::renderTemplate("footer", $data);
                 
                 //If validation has passed then log in
                 if(!$error){
                     
                     Session::set("loggedin", true);
                     Session::set("user_id", $this->_model->getID($email));
-                    Url::redirect("http://testing.sellerstam.mebokund.com/", true); //For some reason it doesn't work if the url is blank...
+                    Url::redirect("http://something.sellerstam.mebokund.com/", true); //For some reason it doesn't work if the url is blank...
                 }
-            } else {
-                 Url::redirect("http://testing.sellerstam.mebokund.com/", true);
             }
         }
         
         public function logout(){
             
             Session::destroy(); /* Clear all sessions set for this project */
-            Url::redirect("http://testing.sellerstam.mebokund.com/", true); /* Goes back to the home page */
+            Url::redirect("http://something.sellerstam.mebokund.com/", true); /* Goes back to the home page */
             
         }
         
@@ -85,6 +88,10 @@
                 
                 if($password1 == ""){
                     $error["no_password"] = "Password is required";
+                } else if(strlen($password1) < 8){
+                    $error["password_short"] = "Password must be atleast 9 characters";
+                } else if(ctype_lower($password1)){
+                    $error["no_uppercase"] = "Password must contain atleast one upper case letter";
                 } else if($password1 != $password2){
                     $error["no_password_match"] = "Passwords do not match";
                 }
