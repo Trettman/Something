@@ -3,6 +3,8 @@
     use Helpers\Form;
     use Helpers\Session;
     use Core\Error;
+    
+    $rainCaptcha = new \Helpers\RainCaptcha();
 
 ?>
 
@@ -41,6 +43,19 @@
             </div>
             <div class="p">
                 <?= Form::input(array("name" => "confirm_password", "placeholder" => "Confirm password", "type" => "password")); ?>
+            </div>
+            <div class="p">
+                <img id="captchaImage" src="<?php echo $rainCaptcha->getImage(); ?>" />
+     
+                <input type="text" name="captcha">
+                 
+                <button type="button" onclick="document.getElementById('captchaImage').src= 
+                '<?php echo $rainCaptcha->getImage(); ?>&morerandom=' + Math.floor(Math.random() * 10000);">New captcha</button>
+                <?php if(isset($error["captcha"])){ ?>
+                    <div class="error">
+                         <?= $error["captcha"]; ?>
+                    </div>
+                <?php } ?>
             </div>
             <div class="p">
                 <?= Form::input(array("name" => "register_button", "value" => "Register", "type" => "submit")); ?>

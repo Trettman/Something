@@ -4,6 +4,9 @@
     use Helpers\Session;
     use Core\Error;
 
+        
+    $rainCaptcha = new \Helpers\RainCaptcha();
+    
 ?>
 
 <div id="global_container">
@@ -40,6 +43,19 @@
             <?php if(isset($error["no_comment"])){ ?>
                 <div class="error">
                      <?= $error["no_comment"]; ?>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="p">
+            <img id="captchaImage" src="<?php echo $rainCaptcha->getImage(); ?>" />
+ 
+            <input name="captcha" type="text" />
+             
+            <button type="button" class='btn btn-danger' onclick="document.getElementById('captchaImage').src= 
+            '<?php echo $rainCaptcha->getImage(); ?>&morerandom=' + Math.floor(Math.random() * 10000);">New captcha</button>
+            <?php if(isset($error["captcha"])){ ?>
+                <div class="error">
+                     <?= $error["captcha"]; ?>
                 </div>
             <?php } ?>
         </div>

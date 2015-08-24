@@ -5,8 +5,9 @@
     use Helpers\Password;
     use Helpers\Url;
     use Core\View;
+    use Core\Controller;
 
-    class Auth extends \Core\Controller {
+    class Auth extends Controller {
         
         private $_model;
         
@@ -14,6 +15,10 @@
             $this->_model = new \Models\Auth();
         }
         
+        /**
+         * Attempts login
+         *
+         */
         public function login(){
 
             $data["title"] = "Login";
@@ -55,6 +60,10 @@
             }
         }
         
+        /**
+         * Logs the user out
+         *
+         */
         public function logout(){
             
             Session::destroy(); /* Clear all sessions set for this project */
@@ -62,6 +71,10 @@
             
         }
         
+        /**
+         * Attempts registration based on user input
+         *
+         */
         public function register(){
             
             $data["title"] = "Register";
@@ -96,6 +109,13 @@
                     $error["no_password_match"] = "Passwords do not match";
                 }
             
+                // For the captcha
+                $rainCaptcha = new \Helpers\RainCaptcha();
+                
+                if(!$rainCaptcha->checkAnswer($_POST['captcha'])){
+                    $error["captcha"] = "Not valid captcha.";
+                }
+                
                 //If no errors were detected then we'll carry on and register the user
                 if(!$error){
                     
@@ -117,6 +137,10 @@
             View::renderTemplate("footer", $data);
         }
         
+        /**
+         * Activates the account
+         *
+         */
         public function activate_account(){
             
             $secret = "35onoi2=-7#%g03kl";

@@ -20,7 +20,7 @@ $hooks = Hooks::get();
 	//hook for plugging in meta tags
 	$hooks->run('meta');
 	?>
-    <link rel="stylesheet/less" href="<?= Url::templatePath() ?>less/main.less?version=22">
+    <link rel="stylesheet/less" href="<?= Url::templatePath() ?>less/main.less?version=26">
     <link rel="shortcut icon" href="<?= Url::templatePath() ?>assets/tab_symbol.ico">
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
 	<script src="<?= Url::templatePath() ?>js/jquery-2.1.4.min.js"></script>

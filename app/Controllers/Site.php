@@ -1,10 +1,10 @@
 <?php
-namespace Controllers;
-
-use Core\View;
-use Core\Controller;
-use Helpers\Session;
-use Helpers\Url;
+    namespace controllers;
+    
+    use Core\View;
+    use Core\Controller;
+    use Helpers\Session;
+    use Helpers\Url;
 
     class Site extends Controller {
     
@@ -12,6 +12,7 @@ use Helpers\Url;
     
         /**
          * Call the parent construct
+         * 
          */
         public function __construct(){
             parent::__construct();
@@ -22,6 +23,7 @@ use Helpers\Url;
     
         /**
          * Define home page title and load template files
+         * 
          */
         public function home(){
             $data['title'] = "Home";
@@ -31,6 +33,10 @@ use Helpers\Url;
             View::renderTemplate('footer', $data);
         }
         
+        /**
+         * Shows the about view
+         *
+         */
         public function about(){
             $data['title'] = "About";
     
@@ -39,6 +45,10 @@ use Helpers\Url;
             View::renderTemplate('footer', $data);
         }
         
+        /**
+         * Shows the contact view, and send an email to the supplied email (mr.otto.1@hotmail.com) with user input
+         *
+         */
         public function contact(){
             $data['title'] = "Contact";
             
@@ -67,6 +77,13 @@ use Helpers\Url;
                     $error["no_comment"] = "Comment is required";
                 }
                 
+                // For the captcha
+                $rainCaptcha = new \Helpers\RainCaptcha();
+                
+                if(!$rainCaptcha->checkAnswer($_POST['captcha'])){
+                    $error["captcha"] = "Not valid captcha.";
+                }
+                
                 if(!$error){
                     $this->_model->sendContactForm($name, $email, $subject, $comment);
                     Session::set("message", "Your comment has been sent successfully! You'll be hearing from us shortly.");
@@ -78,6 +95,10 @@ use Helpers\Url;
             View::renderTemplate('footer', $data);
         }
         
+        /**
+         * Shows the support view
+         *
+         */
         public function support(){
             $data['title'] = "Support";
     
@@ -86,6 +107,10 @@ use Helpers\Url;
             View::renderTemplate('footer', $data);
         }
         
+        /**
+         * Creates the an entry based on user input
+         *
+         */
         public function create_entry(){
             $data['title'] = "Create Entry";
             
