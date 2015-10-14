@@ -8,10 +8,10 @@
         
         /**
          * Sends en email to mr.otto.1@hotmail.com with the user input
-         * @param string @name the name specified by the user
-         * @param string @email the email specified by the user
-         * @param string @subject the subject specified by the user
-         * @param string @comment the main text spcified by the user
+         * @param string $name the name specified by the user
+         * @param string $email the email specified by the user
+         * @param string $subject the subject specified by the user
+         * @param string $comment the main text spcified by the user
          *
          */
         public function sendContactForm($name, $email, $subject, $comment){
