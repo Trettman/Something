@@ -8,7 +8,7 @@
         
         /**
          * Gets password hash from database
-         * @param string @email the email specified by the user during log in
+         * @param string $email the email specified by the user during log in
          *
          */
         public function getHash($email){
@@ -20,7 +20,7 @@
         
         /**
          * Gets user id from database
-         * @param string @email the email specified by the user during log in
+         * @param string $email the email specified by the user during log in
          *
          */
         public function getID($email){
@@ -31,7 +31,7 @@
         
         /**
          * Checks if the account which attempts to login is active
-         * @param string @email the email specified by the user during log in
+         * @param string $email the email specified by the user during log in
          *
          */
         public function isActive($email){
@@ -45,7 +45,7 @@
         
         /**
          * Inserts user into the database
-         * @param array @data data entered by user during registration: name, email, password
+         * @param array $data data entered by user during registration: name, email, password
          *
          */
         public function insert_user($data){
@@ -55,7 +55,7 @@
 
         /**
          * Returns true if an email already exists in the users table
-         * @param string @email the email specified by the user during registration
+         * @param string $email the email specified by the user during registration
          *
          */
         public function exists($email){
@@ -71,8 +71,8 @@
         
         /**
          * Sends verification email to the user after registration
-         * @param string @email the email specified by the user during registration
-         * @param string @name the name specified by the user during registration
+         * @param string $email the email specified by the user during registration
+         * @param string $name the name specified by the user during registration
          *
          */
         public function sendVerificationEmail($email, $name){
@@ -103,7 +103,7 @@
         
         /**
          * Activates account
-         * @param string @email the account's email
+         * @param string $email the account's email
          *
          */
         public function activate_account($email){
