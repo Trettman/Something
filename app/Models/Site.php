@@ -39,7 +39,7 @@
         
         /**
          * Creates an entry in the database
-         * @param array @data the user's id
+         * @param array $data the user's id
          *
          */
         public function create_entry($data){
@@ -48,7 +48,7 @@
         
         /**
          * Inserts the user's input into the database. This references to the entry created with the above method
-         * @param array @post_data all the data inputed by the user and user's id. This includes amount and type specified by the user
+         * @param array $post_data all the data inputed by the user and user's id. This includes amount and type specified by the user
          *
          */
         public function insert_input($post_data){
